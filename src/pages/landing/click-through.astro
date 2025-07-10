@@ -5,7 +5,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Click-through Landing Page Demo',
+  title: 'Codexsus - Landing Page dengan Konversi Tinggi',
 };
 ---
 
@@ -13,28 +13,33 @@ const metadata = {
   <!-- Hero2 Widget ******************* -->
 
   <Hero2
-    tagline="Click-through Demo"
-    title="Click-through Landing Page: The Perfect Bridge to Conversion!"
-    subtitle="Learn how to design a Click-Through Landing Page that seamlessly guides visitors to your main offer."
+    tagline='Landing Page Premium'
+    title='Landing Page yang Mengkonversi Visitor Menjadi Customer!'
+    subtitle='Dapatkan landing page dengan desain yang menarik dan copy yang persuasif untuk meningkatkan conversion rate bisnis Anda.'
     actions={[
-      { variant: 'primary', text: 'Call to Action', href: '#', icon: 'tabler:square-rounded-arrow-right' },
-      { text: 'Learn more', href: '#' },
+      {
+        variant: 'primary',
+        text: 'Konsultasi Sekarang',
+        href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20landing%20page%20premium.%20Bisakah%20kita%20diskusi%3F',
+        icon: 'tabler:brand-whatsapp',
+      },
+      { text: 'Lihat Portfolio', href: '#' },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Click-through Landing Page Hero Image',
+      src: '~/assets/images/hero-image.png',
+      alt: 'Landing Page Design Premium Codexsus',
     }}
   />
 
   <CallToAction
-    title="Coming soon"
-    subtitle="We are working on the content of these demo pages. You will see them very soon. Stay tuned Stay tuned!"
+    title='Siap Meningkatkan Conversion Rate?'
+    subtitle='Dapatkan landing page yang dioptimasi khusus untuk bisnis Anda. Konsultasi gratis untuk menentukan strategi terbaik!'
     actions={[
       {
         variant: 'primary',
-        text: 'Download Template',
-        href: 'https://github.com/onwidget/astrowind',
-        icon: 'tabler:download',
+        text: 'Mulai Project',
+        href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20ingin%20membuat%20landing%20page%20untuk%20bisnis%20saya.%20Bisakah%20kita%20diskusi%3F',
+        icon: 'tabler:brand-whatsapp',
       },
     ]}
   />

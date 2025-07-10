@@ -14,7 +14,7 @@ import Brands from '~/components/widgets/Brands.astro';
 import { YouTube } from 'astro-embed';
 
 const metadata = {
-  title: 'Startup Landing Page',
+  title: 'Codexsus - Website untuk Startup & Bisnis Modern',
 };
 ---
 
@@ -22,31 +22,29 @@ const metadata = {
   <!-- Hero Widget ******************* -->
 
   <Hero
-    tagline="Startup Web Demo"
+    tagline='Website untuk Startup'
     actions={[
       {
         variant: 'primary',
         target: '_blank',
-        text: 'Get templates',
-        href: 'https://github.com/onwidget/astrowind',
-        icon: 'tabler:download',
+        text: 'Hubungi Kami',
+        href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20ingin%20website%20untuk%20startup.%20Bisakah%20kita%20diskusi%3F',
+        icon: 'tabler:brand-whatsapp',
       },
-      { text: 'Learn more', href: '#features' },
-    ]}
-  >
-    <Fragment slot="title">
-      Improve <span class="hidden sm:inline">the online presence of</span> your <span
-        class="text-accent dark:text-white">Startup</span
-      > with Astrowind templates
+      { text: 'Lihat Portfolio', href: '#features' },
+    ]}>
+    <Fragment slot='title'>
+      Bangun <span class='hidden sm:inline'>online presence yang kuat untuk</span>
+      <span class='text-accent dark:text-white'>Startup</span> Anda bersama Codexsus
     </Fragment>
 
-    <Fragment slot="subtitle">
-      Step into the spotlight with <span class="font-semibold">Astrowind</span> templates, your pathway to fortifying your
-      startup's digital footprint, fostering credibility, and expanding your reach.
+    <Fragment slot='subtitle'>
+      Wujudkan visi startup Anda dengan <span class='font-semibold'>website profesional</span> yang memperkuat kredibilitas,
+      menarik investor, dan menjangkau target market yang lebih luas.
     </Fragment>
 
-    <Fragment slot="image">
-      <YouTube id="gxBkghlglTg" title="Astro just Launched.... Could it be the ultimate web framework?" />
+    <Fragment slot='image'>
+      <YouTube id='gxBkghlglTg' title='Astro just Launched.... Could it be the ultimate web framework?' />
       <style is:inline>
         lite-youtube {
           margin: 0 auto;
@@ -59,18 +57,17 @@ const metadata = {
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="About us"
-    subtitle="We believe in the magic of turning dreams into stunning realities. Founded by passionate developers with a shared vision, we set out to simplify the website creation process. Our templates bring together the innovation of Astro 5.0 and the versatility of Tailwind CSS, enabling you to express your unique brand identity like never before."
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    title='About us'
+    subtitle='We believe in the magic of turning dreams into stunning realities. Founded by passionate developers with a shared vision, we set out to simplify the website creation process. Our templates bring together the innovation of Astro 5.0 and the versatility of Tailwind CSS, enabling you to express your unique brand identity like never before.'>
+    <Fragment slot='bg'>
+      <div class='absolute inset-0 bg-blue-50 dark:bg-transparent'></div>
     </Fragment>
   </Features2>
 
   <!-- Stats Widget ****************** -->
 
   <Stats
-    title="Discover the impressive impact of Astrowind"
+    title='Temukan Dampak Luar Biasa dari Codexsus'
     subtitle="The numbers below reflect the trust our users have placed in us and the remarkable outcomes we've helped them achieve."
     stats={[
       { title: 'Downloads', amount: '182K' },
@@ -83,8 +80,8 @@ const metadata = {
   <!-- Brands Widget ****************** -->
 
   <Brands
-    title="Partnerships & Collaborations"
-    subtitle="At Astrowind, we believe in the power of collaboration to drive innovation and create exceptional experiences."
+    title='Partnerships & Collaborations'
+    subtitle='Di Codexsus, kami percaya pada kekuatan kolaborasi untuk mendorong inovasi dan menciptakan pengalaman yang luar biasa.'
     icons={[]}
     images={[
       {
@@ -130,8 +127,8 @@ const metadata = {
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="What services do we provide?"
-    subtitle="We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc."
+    title='What services do we provide?'
+    subtitle='We offer a wide range of website templates that suit various industries and purposes such as business, portfolio, e-commerce, blog, etc.'
     items={[
       {
         title: 'Installation Instructions',
@@ -151,19 +148,18 @@ const metadata = {
           'Providing customer support for any technical issues related to the templates or their implementation.',
         icon: 'flat-color-icons:voice-presentation',
       },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    ]}>
+    <Fragment slot='bg'>
+      <div class='absolute inset-0 bg-blue-50 dark:bg-transparent'></div>
     </Fragment>
   </Features2>
 
   <!-- Features Widget *************** -->
 
   <Features
-    id="features"
-    title="Main features of our templates"
-    subtitle="Possess several key characteristics to effectively cater to the needs of startups and entrepreneurs."
+    id='features'
+    title='Main features of our templates'
+    subtitle='Possess several key characteristics to effectively cater to the needs of startups and entrepreneurs.'
     columns={3}
     items={[
       {
@@ -205,7 +201,7 @@ const metadata = {
   <!-- FAQs Widget ******************* -->
 
   <FAQs
-    title="Frequently Asked Questions"
+    title='Frequently Asked Questions'
     items={[
       {
         title: 'What are landing page templates?',
@@ -237,18 +233,17 @@ const metadata = {
         description:
           "The templates provides a comprehensive step-by-step guide that walk you through the customization process. If you still have doubts, you can reach out to our customer support team. They can answer your questions, provide guidance on customization, and address any issues you're facing.",
       },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    ]}>
+    <Fragment slot='bg'>
+      <div class='absolute inset-0 bg-blue-50 dark:bg-transparent'></div>
     </Fragment>
   </FAQs>
 
   <!-- Features3 Widget ************** -->
 
   <Features3
-    title="Let us know how we can help"
-    subtitle="We’re here to help and answer any question you might have."
+    title='Let us know how we can help'
+    subtitle='We’re here to help and answer any question you might have.'
     columns={4}
     items={[
       {
@@ -302,14 +297,13 @@ const metadata = {
         variant: 'primary',
         target: '_blank',
         text: 'Get templates',
-        href: 'https://github.com/onwidget/astrowind',
+        href: 'https://wa.me/6281234567890',
         icon: 'tabler:download',
       },
-    ]}
-  >
-    <Fragment slot="title">Be a part of our vision</Fragment>
+    ]}>
+    <Fragment slot='title'>Be a part of our vision</Fragment>
 
-    <Fragment slot="subtitle">
+    <Fragment slot='subtitle'>
       Discover a dynamic work environment, unparalleled growth opportunities, and the chance to make a meaningful
       impact.
     </Fragment>

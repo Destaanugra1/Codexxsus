@@ -1,0 +1,195 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Portfolio Codexsus - Project Website yang Telah Kami Kerjakan',
+  description:
+    'Lihat koleksi website dan aplikasi web yang telah dikembangkan oleh tim Codexsus untuk berbagai klien dari startup hingga enterprise.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline='Portfolio Kami'
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Konsultasi Project',
+        href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20portfolio%20Anda.%20Bisakah%20kita%20diskusi%20project%20saya%3F',
+        icon: 'tabler:brand-whatsapp',
+      },
+      { text: 'Download Proposal', href: '#proposal' },
+    ]}
+    image={{ src: '~/assets/images/hero-image.png', alt: 'Portfolio Showcase' }}>
+    <Fragment slot='title'>
+      Portfolio <span class='text-accent dark:text-white'>Website Berkualitas</span><br />
+      <span class='hidden xl:inline'>yang Telah Kami Wujudkan</span>
+    </Fragment>
+
+    <Fragment slot='subtitle'>
+      Lebih dari <span class='font-semibold'>150+ project</span> website profesional telah dipercayakan kepada Codexsus.
+      Dari landing page startup hingga e-commerce enterprise, setiap project dirancang dengan detail dan passion.
+    </Fragment>
+  </Hero>
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title='Kategori Project yang Kami Tangani'
+    subtitle='Setiap project adalah cerita sukses yang unik dengan tantangan dan solusi yang berbeda'
+    tagline='Our Expertise'
+    items={[
+      {
+        title: 'E-Commerce & Online Store',
+        description:
+          'Toko online dengan sistem pembayaran lengkap, inventory management, dan dashboard analytics untuk meningkatkan penjualan.',
+        icon: 'flat-color-icons:currency-exchange',
+      },
+      {
+        title: 'Corporate Website',
+        description:
+          'Website perusahaan yang profesional dengan company profile, team showcase, dan blog terintegrasi untuk membangun trust.',
+        icon: 'flat-color-icons:business-contact',
+      },
+      {
+        title: 'Portfolio Kreatif',
+        description:
+          'Website portfolio untuk fotografer, designer, artist dengan galeri interaktif dan sistem booking appointment.',
+        icon: 'flat-color-icons:gallery',
+      },
+      {
+        title: 'Landing Page Conversion',
+        description:
+          'Landing page yang dioptimasi untuk konversi tinggi dengan A/B testing dan tracking analytics yang detail.',
+        icon: 'flat-color-icons:advertising',
+      },
+      {
+        title: 'Startup & SaaS Platform',
+        description:
+          'Website untuk startup dengan pricing page, user dashboard, dan integrasi payment gateway untuk subscription model.',
+        icon: 'flat-color-icons:template',
+      },
+      {
+        title: 'Blog & Content Platform',
+        description:
+          'Platform content dengan CMS custom, SEO optimization, dan social media integration untuk content marketing.',
+        icon: 'flat-color-icons:document',
+      },
+    ]}>
+    <Fragment slot='bg'>
+      <div class='absolute inset-0 bg-blue-50 dark:bg-transparent'></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    tagline='Case Study'
+    title='Success Story: E-Commerce Fashion Brand'
+    items={[
+      {
+        title: 'Challenge',
+        description:
+          'Klien membutuhkan toko online yang modern dengan sistem inventory real-time dan multiple payment gateway.',
+      },
+      {
+        title: 'Solution',
+        description:
+          'Membangun e-commerce custom dengan React + Node.js, integrasi dengan Shopify API, dan dashboard analytics.',
+      },
+      {
+        title: 'Result',
+        description:
+          '300% peningkatan online sales dalam 6 bulan pertama dengan conversion rate 4.2% (industry average 2.1%).',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80',
+      alt: 'E-commerce Success Story',
+    }}>
+    <Fragment slot='content'>
+      <h3 class='text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2'>
+        Transformasi Digital yang Terukur
+      </h3>
+      Setiap project kami dirancang dengan metrik keberhasilan yang jelas dan terukur
+    </Fragment>
+
+    <Fragment slot='bg'>
+      <div class='absolute inset-0 bg-blue-50 dark:bg-transparent'></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Technology Stack Modern',
+        description:
+          'Menggunakan React, Next.js, TypeScript, dan cloud infrastructure untuk performa dan scalability optimal.',
+      },
+      {
+        title: 'User Experience Focus',
+        description:
+          'Design thinking approach dengan user research dan usability testing untuk memastikan UX yang exceptional.',
+      },
+      {
+        title: 'SEO & Performance Optimization',
+        description:
+          'Core Web Vitals optimization, structured data, dan technical SEO untuk ranking Google yang maksimal.',
+      },
+      {
+        title: 'Ongoing Support & Maintenance',
+        description:
+          'Support berkelanjutan dengan SLA 99.9% uptime, security updates, dan performance monitoring 24/7.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80',
+      alt: 'Development Process',
+    }}>
+    <Fragment slot='content'>
+      <h3 class='text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2'>
+        Metodologi Development yang Proven
+      </h3>
+      Agile development dengan sprint planning dan daily standup untuk transparency maksimal
+    </Fragment>
+
+    <Fragment slot='bg'>
+      <div class='absolute inset-0 bg-blue-50 dark:bg-transparent'></div>
+    </Fragment>
+  </Content>
+
+  <!-- CallToAction Widget *********** -->
+
+  <CallToAction
+    id='proposal'
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Mulai Project Anda',
+        href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Setelah%20melihat%20portfolio%20Anda,%20saya%20tertarik%20untuk%20memulai%20project.%20Bisakah%20kita%20diskusi%3F',
+        icon: 'tabler:brand-whatsapp',
+      },
+    ]}>
+    <Fragment slot='title'>
+      Siap Menjadi <span class='text-accent dark:text-white'>Success Story</span> Berikutnya?
+    </Fragment>
+
+    <Fragment slot='subtitle'>
+      Bergabunglah dengan 150+ klien yang telah mempercayakan project mereka kepada Codexsus. <br
+        class='hidden md:inline'
+      />
+      Konsultasi gratis untuk menentukan solusi terbaik untuk bisnis Anda.
+    </Fragment>
+  </CallToAction>
+</Layout>
