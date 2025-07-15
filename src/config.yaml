@@ -11,7 +11,7 @@ metadata:
   title:
     default: Codexsus - Jasa Pembuatan Website Profesional
     template: '%s — Codexsus'
-  description: "🚀 Jasa pembuatan website profesional untuk bisnis, startup, portofolio, dan landing page. Hubungi kami untuk konsultasi gratis!"
+  description: '🚀 Jasa pembuatan website profesional untuk bisnis, startup, portofolio, dan landing page. Hubungi kami untuk konsultasi gratis!'
   robots:
     index: true
     follow: true

@@ -55,7 +55,6 @@ We're embarking on an exciting journey with **AstroWind 2.0**, and we want you t
 
 <br>
 
-
 ## TL;DR
 
 ```shell
