@@ -15,9 +15,14 @@ export const headerData = {
       text: 'Layanan',
       links: [
         {
+          text: 'Produk Kami',
+          href: getPermalink('/products'),
+        },
+        {
           text: 'Fitur Unggulan',
           href: getPermalink('/#features'),
         },
+
         {
           text: 'Layanan Kami',
           href: getPermalink('/services'),
@@ -92,7 +97,7 @@ export const footerData = {
         { text: 'Landing Page', href: getPermalink('/landing/click-through') },
         { text: 'Portfolio Website', href: getPermalink('/homes/startup') },
         { text: 'Company Profile', href: getPermalink('/services') },
-        { text: 'E-commerce', href: getPermalink('/services') },
+        { text: 'E-commerce', href: getPermalink('/products') },
         { text: 'SEO Optimization', href: getPermalink('/services') },
         { text: 'Maintenance', href: getPermalink('/services') },
       ],

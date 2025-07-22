@@ -1,0 +1,226 @@
+---
+import gsap from 'gsap';
+
+export interface CardSwapProps {
+  width?: number | string;
+  height?: number | string;
+  cardDistance?: number;
+  verticalDistance?: number;
+  delay?: number;
+  pauseOnHover?: boolean;
+  onCardClick?: (idx: number) => void;
+  skewAmount?: number;
+  easing?: "linear" | "elastic";
+}
+
+export interface CardProps {
+  customClass?: string;
+  style?: Record<string, string | number>;
+  onClick?: (e: MouseEvent) => void;
+  className?: string;
+}
+
+const {
+  width = 500,
+  height = 400,
+  cardDistance = 60,
+  verticalDistance = 70,
+  delay = 5000,
+  pauseOnHover = false,
+  onCardClick,
+  skewAmount = 6,
+  easing = "elastic",
+} = Astro.props;
+
+const config =
+  easing === "elastic"
+    ? {
+        ease: "elastic.out(0.6,0.9)",
+        durDrop: 2,
+        durMove: 2,
+        durReturn: 2,
+        promoteOverlap: 0.9,
+        returnDelay: 0.05,
+      }
+    : {
+        ease: "power1.inOut",
+        durDrop: 0.8,
+        durMove: 0.8,
+        durReturn: 0.8,
+        promoteOverlap: 0.45,
+        returnDelay: 0.2,
+      };
+---
+
+<div
+  class="absolute bottom-0 right-0 transform translate-x-[5%] translate-y-[20%] origin-bottom-right perspective-[900px] overflow-visible max-[768px]:translate-x-[25%] max-[768px]:translate-y-[25%] max-[768px]:scale-[0.75] max-[480px]:translate-x-[25%] max-[480px]:translate-y-[25%] max-[480px]:scale-[0.55]"
+  style={`width: ${width}px; height: ${height}px;`}
+  id="card-swap-container"
+>
+  <slot />
+</div>
+
+<script>
+  import gsap from 'gsap';
+
+  // Constants for the animation
+  const cardDistance = 60;
+  const verticalDistance = 70;
+  const delay = 5000;
+  const pauseOnHover = false;
+  const skewAmount = 6;
+  const easing = "elastic";
+
+  const config = easing === "elastic"
+    ? {
+        ease: "elastic.out(0.6,0.9)",
+        durDrop: 2,
+        durMove: 2,
+        durReturn: 2,
+        promoteOverlap: 0.9,
+        returnDelay: 0.05,
+      }
+    : {
+        ease: "power1.inOut",
+        durDrop: 0.8,
+        durMove: 0.8,
+        durReturn: 0.8,
+        promoteOverlap: 0.45,
+        returnDelay: 0.2,
+      };
+
+  function makeSlot(i, distX, distY, total) {
+    return {
+      x: i * distX,
+      y: -i * distY,
+      z: -i * distX * 1.5,
+      zIndex: total - i,
+    };
+  }
+
+  function placeNow(el, slot, skew) {
+    gsap.set(el, {
+      x: slot.x,
+      y: slot.y,
+      z: slot.z,
+      xPercent: -50,
+      yPercent: -50,
+      skewY: skew,
+      transformOrigin: "center center",
+      zIndex: slot.zIndex,
+      force3D: true,
+    });
+  }
+
+  // Wait for DOM content to load
+  document.addEventListener('DOMContentLoaded', () => {
+    // Get container element
+    const container = document.getElementById('card-swap-container');
+    if (!container) {
+      console.error('Card swap container not found');
+      return;
+    }
+    
+    const cards = Array.from(container.children);
+    const refs = cards;
+    let order = Array.from({ length: cards.length }, (_, i) => i);
+    let tlRef = null;
+    let intervalRef = null;
+
+    function swap() {
+      if (order.length < 2) return;
+
+      const [front, ...rest] = order;
+      const elFront = refs[front];
+      const tl = gsap.timeline();
+      tlRef = tl;
+
+      tl.to(elFront, {
+        y: "+=500",
+        duration: config.durDrop,
+        ease: config.ease,
+      });
+
+      tl.addLabel("promote", `-=${config.durDrop * config.promoteOverlap}`);
+      rest.forEach((idx, i) => {
+        const el = refs[idx];
+        const slot = makeSlot(i, cardDistance, verticalDistance, refs.length);
+        tl.set(el, { zIndex: slot.zIndex }, "promote");
+        tl.to(
+          el,
+          {
+            x: slot.x,
+            y: slot.y,
+            z: slot.z,
+            duration: config.durMove,
+            ease: config.ease,
+          },
+          `promote+=${i * 0.15}`
+        );
+      });
+
+      const backSlot = makeSlot(
+        refs.length - 1,
+        cardDistance,
+        verticalDistance,
+        refs.length
+      );
+      tl.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
+      tl.call(
+        () => {
+          gsap.set(elFront, { zIndex: backSlot.zIndex });
+        },
+        undefined,
+        "return"
+      );
+      tl.set(elFront, { x: backSlot.x, z: backSlot.z }, "return");
+      tl.to(
+        elFront,
+        {
+          y: backSlot.y,
+          duration: config.durReturn,
+          ease: config.ease,
+        },
+        "return"
+      );
+
+      tl.call(() => {
+        order = [...rest, front];
+      });
+    }
+
+    // Initial placement
+    const total = refs.length;
+    refs.forEach((r, i) =>
+      placeNow(
+        r,
+        makeSlot(i, cardDistance, verticalDistance, total),
+        skewAmount
+      )
+    );
+
+    swap();
+    intervalRef = window.setInterval(swap, delay);
+
+    if (pauseOnHover) {
+      const pause = () => {
+        if (tlRef) tlRef.pause();
+        if (intervalRef !== null) window.clearInterval(intervalRef);
+      };
+      const resume = () => {
+        if (tlRef) tlRef.play();
+        intervalRef = window.setInterval(swap, delay);
+      };
+      container.addEventListener("mouseenter", pause);
+      container.addEventListener("mouseleave", resume);
+    }
+    
+    // Clean up on page navigation
+    return () => {
+      if (intervalRef !== null) {
+        window.clearInterval(intervalRef);
+      }
+    };
+  });
+}
+</script>

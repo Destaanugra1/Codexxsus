@@ -1,0 +1,280 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Products from '~/components/widgets/Products.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+import TemplateShowcase from '~/components/widgets/TemplateShowcase.astro';
+
+// local image
+import xenonAnim from '~/assets/images/templates/cottage.jpg';
+import ecomm from '~/assets/images/templates/misty-forest.jpg';
+import kasir from '~/assets/images/templates/forest-aerial.jpg';
+import landingPage from '~/assets/images/templates/mountain-forest.jpg';
+
+const metadata = {
+  title: 'Produk Kami - Codexsus',
+  description:
+    'Jelajahi berbagai produk berkualitas tinggi dari Codexsus untuk memenuhi kebutuhan website dan portofolio digital Anda.',
+};
+
+// Note: For template showcase section, we're currently using remote images from Unsplash
+// If you want to use local images:
+// 1. Add your images to: src/assets/images/templates/
+// 2. Import them at the top of this file:
+//    import forestImage from '~/assets/images/templates/your-forest-image.jpg';
+// 3. Use the imported variables in the templates section below:
+//    image: forestImage,
+
+// Sample product data - replace with your actual products
+const products = [
+  {
+    title: 'Website Portofolio Personal',
+    description:
+      'Website portofolio profesional untuk personal branding yang memukau dengan desain modern dan responsif.',
+    image:
+      'https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 1.500.000',
+    discount: 'Rp 2.000.000',
+    rating: 5,
+    features: ['Responsif di semua perangkat', 'Optimasi SEO', 'Desain modern & menarik', 'Hosting 1 tahun'],
+    callToAction: {
+      text: 'Pesan Sekarang',
+      href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20produk%20Website%20Portofolio%20Personal',
+      icon: 'tabler:shopping-cart',
+      target: '_blank',
+    },
+    badge: 'Terlaris',
+  },
+  {
+    title: 'Company Profile',
+    description:
+      'Website profesional untuk perusahaan Anda dengan tampilan elegan dan fitur lengkap untuk menampilkan bisnis Anda.',
+    image:
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 3.500.000',
+    discount: 'Rp 4.500.000',
+    rating: 5,
+    features: ['Halaman produk & layanan', 'Halaman tim & testimoni', 'Integrasi media sosial', 'Maintenance 6 bulan'],
+    callToAction: {
+      text: 'Pesan Sekarang',
+      href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20produk%20Company%20Profile',
+      icon: 'tabler:shopping-cart',
+      target: '_blank',
+    },
+    badge: 'Populer',
+  },
+  {
+    title: 'Landing Page',
+    description: 'Landing page yang dioptimalkan untuk konversi dengan desain menarik dan call-to-action yang efektif.',
+    image:
+      'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 1.200.000',
+    rating: 4,
+    features: ['Fokus pada konversi', 'Form kontak terintegrasi', 'Tracking analytics', 'A/B Testing'],
+    callToAction: {
+      text: 'Pesan Sekarang',
+      href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20produk%20Landing%20Page',
+      icon: 'tabler:shopping-cart',
+      target: '_blank',
+    },
+  },
+  {
+    title: 'E-commerce Website',
+    description:
+      'Solusi e-commerce lengkap untuk bisnis online Anda dengan sistem pembayaran terintegrasi dan manajemen produk.',
+    image:
+      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 6.500.000',
+    discount: 'Rp 8.000.000',
+    rating: 5,
+    features: ['Manajemen produk', 'Sistem pembayaran terintegrasi', 'Dashboard admin', 'Laporan penjualan'],
+    callToAction: {
+      text: 'Pesan Sekarang',
+      href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20produk%20E-commerce%20Website',
+      icon: 'tabler:shopping-cart',
+      target: '_blank',
+    },
+    badge: 'Baru',
+  },
+  {
+    title: 'Blog Website',
+    description:
+      'Platform blog yang mudah digunakan dengan desain responsif dan optimasi SEO untuk meningkatkan visibilitas online.',
+    image:
+      'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    price: 'Rp 2.200.000',
+    rating: 4,
+    features: ['CMS terintegrasi', 'Kategori & tag', 'Komentar & interaksi', 'Newsletter signup'],
+    callToAction: {
+      text: 'Pesan Sekarang',
+      href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20produk%20Blog%20Website',
+      icon: 'tabler:shopping-cart',
+      target: '_blank',
+    },
+  },
+  {
+    title: 'Aplikasi Web Custom',
+    description:
+      'Aplikasi web khusus sesuai kebutuhan bisnis Anda dengan fitur-fitur yang disesuaikan dengan proses bisnis Anda.',
+    image:
+      'https://images.unsplash.com/photo-1535957998253-26ae1ef29506?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
+    price: 'Mulai dari Rp 10.000.000',
+    rating: 5,
+    features: ['Analisis kebutuhan bisnis', 'Pengembangan custom', 'Integrasi sistem', 'Pelatihan & dokumentasi'],
+    callToAction: {
+      text: 'Konsultasi',
+      href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20produk%20Aplikasi%20Web%20Custom',
+      icon: 'tabler:message-circle',
+      target: '_blank',
+    },
+    badge: 'Premium',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+  <Hero
+    tagline='Produk Kami'
+    title='Solusi Digital Terbaik untuk Bisnis Anda'
+    subtitle='Jelajahi berbagai produk dan layanan kami yang dirancang untuk memenuhi kebutuhan bisnis digital Anda dengan kualitas premium dan harga terjangkau.'
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Konsultasi Gratis',
+        href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20ingin%20konsultasi%20produk%20untuk%20kebutuhan%20website%20saya.',
+        target: '_blank',
+        icon: 'tabler:message-circle',
+      },
+      { text: 'Lihat Portfolio', href: '/portfolio' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80',
+      alt: 'Codexsus - Produk Website dan Layanan Digital',
+    }}
+  />
+
+  <!-- Products Widget ************** -->
+  <Products
+    title='Pilihan Produk Premium'
+    subtitle='Temukan produk berkualitas tinggi yang dirancang khusus untuk memenuhi kebutuhan digital Anda'
+    products={products}
+    columns={3}
+  />
+
+  <!-- Template Showcase Widget ************** -->
+  <TemplateShowcase
+    tagline='Portfolio'
+    title='Contoh Website yang Telah Kami Kembangkan'
+    subtitle='Jelajahi beberapa contoh website yang telah kami kembangkan untuk berbagai kebutuhan bisnis'
+    templates={[
+      {
+        title: 'Xenon Anime Website',
+        description:
+          'Portal streaming anime modern dengan koleksi lengkap, tampilan menarik, dan sistem rating untuk penggemar anime. Dilengkapi informasi detail setiap judul anime dan rekomendasi konten serupa.',
+        image: xenonAnim,
+        category: 'Entertainment',
+        callToAction: {
+          text: 'Lihat Detail',
+          href: '/portfolio',
+          icon: 'tabler:eye',
+        },
+      },
+      {
+        title: 'Sistem Kasir Digital',
+        description:
+          'Aplikasi point of sale modern dengan scanner barcode, manajemen produk, dan dashboard analitik real-time. Mempermudah pengelolaan toko dan pelacakan penjualan dengan antarmuka pengguna yang intuitif.',
+        image: kasir,
+        category: 'Aplikasi Bisnis',
+        callToAction: {
+          text: 'Lihat Detail',
+          href: '/portfolio',
+          icon: 'tabler:eye',
+        },
+      },
+      {
+        title: 'Dashboard Analytics',
+        description:
+          'Platform analitik bisnis yang komprehensif dengan visualisasi data real-time, grafik performa, dan metrik penjualan. Membantu pemilik bisnis memahami tren pasar dan membuat keputusan berdasarkan data.',
+        image: ecomm,
+        category: 'Business Intelligence',
+        callToAction: {
+          text: 'Lihat Detail',
+          href: '/portfolio',
+          icon: 'tabler:eye',
+        },
+      },
+      {
+        title: 'Starlight Resort',
+        description:
+          'Landing page premium untuk resort dengan nuansa malam berbintang yang menakjubkan. Dirancang untuk memberikan pengalaman browsing yang memukau dan meningkatkan konversi pemesanan kamar hotel.',
+        image: landingPage,
+        category: 'Hospitality',
+        callToAction: {
+          text: 'Lihat Detail',
+          href: '/portfolio',
+          icon: 'tabler:eye',
+        },
+      },
+    ]}
+    columns={4}
+  />
+
+  <!-- Content Widget ************** -->
+  <Content
+    isReversed
+    tagline='Kualitas Terbaik'
+    title='Mengapa Memilih Produk Kami?'
+    items={[
+      {
+        title: 'Desain Modern & Responsif',
+        description:
+          'Setiap produk kami dirancang dengan fokus pada pengalaman pengguna dan tampilan yang menarik di semua perangkat.',
+        icon: 'tabler:device-laptop',
+      },
+      {
+        title: 'Performa Optimal',
+        description:
+          'Kami memastikan produk kami memiliki kecepatan loading yang tinggi dan performa yang optimal untuk pengalaman pengguna terbaik.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'SEO Friendly',
+        description:
+          'Produk kami dioptimalkan untuk mesin pencari, membantu meningkatkan visibilitas online bisnis Anda.',
+        icon: 'tabler:chart-line',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1531973576160-7125cd663d86?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
+      alt: 'Keunggulan Produk Codexsus',
+    }}>
+    <Fragment slot='content'>
+      <h3 class='text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2'>Kepuasan Anda Prioritas Kami</h3>
+      <p>
+        Kami berkomitmen untuk memberikan produk dan layanan dengan kualitas terbaik. Tim ahli kami siap membantu Anda
+        dalam setiap tahap, dari konsultasi awal hingga pemeliharaan berkelanjutan.
+      </p>
+    </Fragment>
+
+    <Fragment slot='bg'>
+      <div class='absolute inset-0 bg-blue-50 dark:bg-transparent'></div>
+    </Fragment>
+  </Content>
+
+  <!-- CallToAction Widget *********** -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Mulai Sekarang',
+        href: 'https://wa.me/62895610090128?text=Halo%20Codexsus!%20Saya%20tertarik%20dengan%20produk%20Anda%20dan%20ingin%20konsultasi%20lebih%20lanjut.',
+        target: '_blank',
+        icon: 'tabler:download',
+      },
+    ]}
+    title='Siap Untuk Tingkatkan Bisnis Digital Anda?'
+    subtitle='Hubungi kami sekarang untuk konsultasi gratis dan dapatkan penawaran spesial untuk website impian Anda.'
+  />
+</Layout>

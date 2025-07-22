@@ -43,7 +43,7 @@ const metadata = {
       menarik investor, dan menjangkau target market yang lebih luas.
     </Fragment>
 
-    <Fragment slot='image'>
+    <!-- <Fragment slot='image'>
       <YouTube id='gxBkghlglTg' title='Astro just Launched.... Could it be the ultimate web framework?' />
       <style is:inline>
         lite-youtube {
@@ -51,7 +51,7 @@ const metadata = {
           max-width: 100%;
         }
       </style>
-    </Fragment>
+    </Fragment> -->
   </Hero>
 
   <!-- Features2 Widget ************** -->
@@ -66,16 +66,76 @@ const metadata = {
 
   <!-- Stats Widget ****************** -->
 
-  <Stats
-    title='Temukan Dampak Luar Biasa dari Codexsus'
-    subtitle="The numbers below reflect the trust our users have placed in us and the remarkable outcomes we've helped them achieve."
-    stats={[
-      { title: 'Downloads', amount: '182K' },
-      { title: 'Websites Launched', amount: '87' },
-      { title: 'User Ratings', amount: '4.8' },
-      { title: 'Satisfied Clients', amount: '116K' },
-    ]}
-  />
+  <div class='stats-section bg-[#050721]'>
+    <Stats
+      title='Temukan Dampak Luar Biasa dari Codexsus'
+      subtitle="The numbers below reflect the trust our users have placed in us and the remarkable outcomes we've helped them achieve."
+      stats={[
+        { title: 'DOWNLOADS', amount: '0' },
+        { title: 'WEBSITES LAUNCHED', amount: '0' },
+        { title: 'USER RATINGS', amount: '0' },
+      ]}
+      id='animated-stats'
+      classes={{
+        container: 'py-12',
+        title: 'text-white',
+        subtitle: 'text-gray-300',
+        statsIcon: 'text-white',
+        statsContainer: 'mt-8',
+      }}
+    />
+  </div>
+
+  <style>
+    .stats-section {
+      background-color: #050721;
+      color: white;
+    }
+
+    #animated-stats {
+      --column-count: 4;
+    }
+
+    @media (max-width: 768px) {
+      #animated-stats {
+        --column-count: 2;
+      }
+    }
+
+    #animated-stats .flex {
+      display: flex;
+      justify-content: space-between;
+      border-color: rgba(255, 255, 255, 0.1);
+      padding: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #animated-stats .flex > div {
+      width: calc(100% / var(--column-count));
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #animated-stats .flex > div:last-child {
+      border-right: none;
+    }
+
+    #animated-stats .font-heading {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    #animated-stats .text-sm {
+      font-size: 0.875rem;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
 
   <!-- Brands Widget ****************** -->
 
@@ -309,3 +369,203 @@ const metadata = {
     </Fragment>
   </CallToAction>
 </Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Give the DOM time to render fully with all styles
+    setTimeout(() => {
+      initStatsAnimation();
+    }, 100);
+
+    function initStatsAnimation() {
+      // Function to animate counting with smooth easing
+      function animateValue(obj, start, end, duration, isThousand, hasDecimal) {
+        let startTimestamp = null;
+
+        // Easing function for smoother animation
+        // This creates a more natural-looking count effect that slows down at the end
+        const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const elapsed = timestamp - startTimestamp;
+          const progress = Math.min(elapsed / duration, 1);
+
+          // Apply easing for smoother animation
+          const easedProgress = easeOutQuart(progress);
+
+          // Calculate the current value based on progress
+          let value;
+          if (hasDecimal) {
+            value = easedProgress * (end - start) + start;
+          } else {
+            value = Math.floor(easedProgress * (end - start) + start);
+          }
+
+          // Format the display value
+          let displayValue;
+          if (isThousand) {
+            if (hasDecimal) {
+              displayValue = (value / 1000).toFixed(1) + 'K';
+            } else {
+              displayValue = Math.floor(value / 1000) + 'K';
+            }
+          } else if (hasDecimal) {
+            // For decimal values like 4.8
+            displayValue = value.toFixed(1);
+          } else {
+            displayValue = value.toString();
+          }
+
+          obj.innerHTML = displayValue;
+
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            // Ensure the final value is exactly the target value
+            if (isThousand) {
+              if (hasDecimal) {
+                obj.innerHTML = (end / 1000).toFixed(1) + 'K';
+              } else {
+                obj.innerHTML = Math.floor(end / 1000) + 'K';
+              }
+            } else if (hasDecimal) {
+              obj.innerHTML = end.toFixed(1);
+            } else {
+              obj.innerHTML = end.toString();
+            }
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+
+      // Directly target the stats container
+      const statsSection = document.getElementById('animated-stats');
+      if (!statsSection) {
+        console.error('Stats section not found!');
+        return;
+      }
+
+      // Animation should run every time the element comes into view
+      // We're removing the localStorage check to ensure animation plays each time
+
+      // Get the specific stats values - updated to match the UI in the image
+      const targetValues = [
+        { value: 182000, isThousand: true, hasDecimal: false }, // 182K Downloads
+        { value: 87, isThousand: false, hasDecimal: false }, // 87 Websites Launched
+        { value: 4.8, isThousand: false, hasDecimal: true }, // 4.8 User Ratings
+        { value: 116000, isThousand: true, hasDecimal: false }, // 116K Satisfied Clients
+      ];
+
+      // Find all elements with numbers in the stats section
+      // Updated selectors for our custom styled stats
+      const selectors = [
+        '.font-heading', // Primary selector for the stats
+        '#animated-stats .flex > div > div:first-of-type', // Target the first div in each stat item (the number)
+        '#animated-stats [class*="text-primary"]',
+        '#animated-stats [class*="font-bold"]',
+        '.text-white.text-4xl',
+        '.text-white.text-5xl',
+        '[class*="text-white"]',
+        '[class*="statsValueContainer"]',
+        '[class*="text-5xl"]',
+      ];
+
+      // Try each selector until we find elements
+      let numberElements = [];
+      for (const selector of selectors) {
+        const elements = statsSection.querySelectorAll(selector);
+        if (elements.length > 0) {
+          console.log(`Found ${elements.length} elements with selector: ${selector}`);
+          numberElements = elements;
+          break;
+        }
+      }
+
+      if (numberElements.length === 0) {
+        // Direct method - find all divs inside the stats container
+        console.log('Using direct method to find stat elements');
+
+        // Get the flex container that holds all the stat items
+        const flexContainer = statsSection.querySelector('.flex');
+        if (flexContainer) {
+          // Get all direct child divs (stat items)
+          const statItems = Array.from(flexContainer.children);
+
+          // From each stat item, get the first div (which should be the number)
+          numberElements = statItems
+            .map((item) => {
+              // Find the element that contains the number
+              const numberElement = item.querySelector('div:first-of-type, .font-heading, [class*="text-primary"]');
+              return numberElement;
+            })
+            .filter((el) => el); // Filter out any undefined elements
+
+          console.log(`Found ${numberElements.length} stat elements via direct structure navigation`);
+        }
+
+        // If we still don't have elements, try a text-based approach
+        if (numberElements.length === 0) {
+          console.error('Could not find stat elements with standard selectors or direct navigation');
+
+          // Get all direct child divs that might contain the numbers
+          const allDivs = statsSection.querySelectorAll('div');
+
+          // Filter to only those likely to be stat numbers (containing only numbers and possibly K, decimal point)
+          const likelyStatElements = Array.from(allDivs).filter((el) => {
+            const text = el.textContent?.trim();
+            return text && /^[0-9K.]+$/.test(text);
+          });
+
+          if (likelyStatElements.length > 0) {
+            console.log(`Found ${likelyStatElements.length} likely stat elements by content`);
+            numberElements = likelyStatElements;
+          }
+        }
+      }
+
+      if (numberElements.length > 0) {
+        // Set up intersection observer for animation
+        setupAnimation(numberElements, targetValues);
+      } else {
+        console.error('Failed to find any stat elements to animate');
+      }
+      function setupAnimation(elements, values) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                console.log('Stats section is visible, starting animation');
+
+                // Animate each stat element
+                elements.forEach((el, index) => {
+                  if (index < values.length) {
+                    const { value, isThousand, hasDecimal } = values[index];
+
+                    // Start the animation from 0 to the target value
+                    animateValue(el, 0, value, 2000, isThousand, hasDecimal);
+                  }
+                });
+
+                // Disconnect the observer once animation starts
+                // This ensures the animation only runs once per scroll into view
+                observer.disconnect();
+              }
+            });
+          },
+          {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1,
+          }
+        );
+
+        // Make sure statsSection exists before observing
+        if (statsSection) {
+          // Start observing the stats section
+          observer.observe(statsSection);
+        }
+      }
+    } // Close the initStatsAnimation function
+  });
+</script>

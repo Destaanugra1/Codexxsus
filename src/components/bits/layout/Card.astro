@@ -1,0 +1,30 @@
+---
+export interface CardProps {
+  customClass?: string;
+  style?: Record<string, string | number>;
+  width?: number | string;
+  height?: number | string;
+  onClick?: (e: MouseEvent) => void;
+}
+
+const { customClass = '', style = {}, width, height } = Astro.props as CardProps;
+
+// Convert style object to inline style string
+const styleObj = {...style};
+if (width) styleObj.width = typeof width === 'number' ? `${width}px` : width;
+if (height) styleObj.height = typeof height === 'number' ? `${height}px` : height;
+const styleStr = Object.entries(styleObj)
+  .map(([key, value]) => `${key}:${value}`)
+  .join(';');
+---
+
+<div
+  class={`absolute top-1/2 left-1/2 rounded-xl border border-white bg-black [transform-style:preserve-3d] [will-change:transform] [backface-visibility:hidden] ${customClass}`}
+  style={styleStr}
+>
+  <slot />
+</div>
+
+<script>
+  // Add event handlers or other client-side functionality here if needed
+</script>
